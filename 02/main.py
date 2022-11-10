@@ -1,4 +1,4 @@
-from simulation import Simulation
+from lesson_simulation import Simulation
 import itertools
 import numpy as np
 import pandas as pd

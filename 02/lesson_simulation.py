@@ -44,6 +44,7 @@ class Simulation:
 
         reproducers = [x for x in self.agents if x.reproductive == True]
         hawks_ratio = len([x for x in reproducers if x.strategy == 'Hawk']) / len(reproducers)
+        print(len(reproducers))
 
         self.hawks_ratios.append(hawks_ratio)
         self.doves_ratios.append(1-hawks_ratio)
