@@ -15,7 +15,9 @@ class Simulation:
     def __generate_agents(self, population):
         initial_strategies = ['Hawk']
         initial_strategies.extend(['Dove'] * (population-1))
-        random.shuffle(initial_strategies)
+        # 課題1
+        # initial_strategiesをランダムにシャッフルする処理↓
+
         return [Agent(index=i, strategy=initial_strategies[i]) for i in range(population)]
 
     def __battle(self, V, C):
@@ -23,18 +25,15 @@ class Simulation:
         for i in range(0, self.population, 2):
             focal1 = self.agents[i]
             focal2 = self.agents[i+1]
+            # 課題2
             if focal1.strategy == 'Hawk' and focal2.strategy == 'Hawk':
-                focal1.points = V
-                focal2.points = -C
+                # ゲームの処理
             elif focal1.strategy == 'Hawk' and focal2.strategy == 'Dove':
-                focal1.points = V
-                focal2.points = 0
+                # ゲームの処理
             elif focal1.strategy == 'Dove' and focal2.strategy == 'Hawk':
-                focal1.points = 0
-                focal2.points = V
+                # ゲームの処理
             elif focal1.strategy == 'Dove' and focal2.strategy == 'Dove':
-                focal1.points = V
-                focal2.points = 0
+                # ゲームの処理
 
     def __calculate_fitness(self):
         avg = np.mean([x.points for x in self.agents])
@@ -45,16 +44,22 @@ class Simulation:
         reproducers = [x for x in self.agents if x.reproductive == True]
         hawks_ratio = len([x for x in reproducers if x.strategy == 'Hawk']) / len(reproducers)
 
-        self.hawks_ratios.append(hawks_ratio)
-        self.doves_ratios.append(1-hawks_ratio)
+        # 課題3
+        # self.hawks_ratio（リスト）にhawks_ratioを追加する処理
+        # self.doves_ratio（リスト）にdoves_ratioを追加する処理
 
         return hawks_ratio
 
     def __make_next_generation(self, hawks_ratio):
         strategies = ['Hawk'] * int(self.population*hawks_ratio)
         strategies.extend(['Dove'] * (self.population - int(self.population*hawks_ratio)))
-        random.shuffle(strategies)
-        self.agents = [Agent(index=i, strategy=strategies[i]) for i in range(self.population)]
+        # 課題4(課題1とおなじ)
+        # strategiesをランダムにシャッフルする処理
+
+        # 課題5
+        # self.agentsを更新する処理↓
+        # population人のAgent オブジェクトのリストを代入する。indexがiならstrategyはstrategies[i]
+        self.agents = []
 
 
     def run_one_episode(self, episode, V, C):
